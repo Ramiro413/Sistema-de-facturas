@@ -1,0 +1,79 @@
+<h1 mat-dialog-title>{{ data?.title }}</h1>
+
+<mat-dialog-content>
+    <form [formGroup]="facturasForm" (submit)="onSave()">
+
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>RFC</mat-label>
+            <input type="text" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" formControlName="rfc" matInput />
+            <mat-error>
+                {{ baseForm.getErrorMessage(facturasForm.get('rfc')) }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <textarea formControlName="direccion" matInput placeholder="Escribe tu dirección"></textarea>
+            
+            <mat-error>
+                {{ baseForm.getErrorMessage(facturasForm.get('direccion')) }}
+            </mat-error>
+        </mat-form-field>
+
+        
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>CFID</mat-label>
+          <select matNativeControl required formControlName="cfid">
+            <option value="1">Adquisición de mercancía.</option>
+            <option value="2">Gastos en general.</option>
+            <option value="3">Equipo de transporte.</option>
+            <option value="4">Otra maquinaría y equipo.</option>
+          </select>
+          <mat-error>
+            {{ baseForm.getErrorMessage(facturasForm.get('cfid')) }}
+        </mat-error>
+        </mat-form-field>
+
+  
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Elige una fecha</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaFactura">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>
+                {{ baseForm.getErrorMessage(facturasForm.get('fechaFactura')) }}
+            </mat-error>
+          </mat-form-field>
+
+ 
+
+
+  
+
+
+
+
+        <div align="center">
+            <button mat-flat-button color="primary" [disabled]="facturasForm.invalid">
+                <mat-icon>save</mat-icon>
+                {{ titleButton }}
+            </button>
+            <button mat-flat-button color="warn" (click)="onClean()">
+                <mat-icon>clear</mat-icon>
+                Limpiar
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+        Cerrar
+    </button>
+</mat-dialog-actions>

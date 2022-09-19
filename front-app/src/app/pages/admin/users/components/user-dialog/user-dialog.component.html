@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>{{ data?.title }}</h1>
+
+<mat-dialog-content>
+    <form [formGroup]="userForm" (submit)="onSave()">
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input type="text" formControlName="nombre" matInput />
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('nombre')) }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input type="text" formControlName="apellidos" matInput />
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('apellidos')) }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Nombre de Usuario</mat-label>
+            <input type="text" formControlName="username" matInput />
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('username')) }}
+            </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field *ngIf="actionTODO == 'new'" class="full-width" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input [type]="hidePwd ? 'password' : 'text'" formControlName="password" matInput />
+            <button type="button" mat-icon-button matSuffix (click)="hidePwd = !hidePwd">
+                <mat-icon>{{ hidePwd ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('password')) }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="actionTODO == 'new'" class="full-width" appearance="outline">
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input [type]="hideConfirmPwd ? 'password' : 'text'" type="text" formControlName="confirmPassword" matInput />
+            <button type="button" mat-icon-button matSuffix (click)="hideConfirmPwd = !hideConfirmPwd">
+                <mat-icon>{{ hideConfirmPwd ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('confirmPassword')) }}
+            </mat-error>
+        </mat-form-field>
+
+        <div align="center">
+            <button mat-flat-button color="primary" [disabled]="userForm.invalid">
+                <mat-icon>save</mat-icon>
+                {{ titleButton }}
+            </button>
+            <button mat-flat-button color="warn" (click)="onClean()">
+                <mat-icon>clear</mat-icon>
+                Limpiar
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+        Cerrar
+    </button>
+</mat-dialog-actions>

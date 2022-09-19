@@ -1,0 +1,32 @@
+<mat-toolbar color="warn">
+    <span>Menu</span>
+</mat-toolbar>
+
+<mat-nav-list>
+    <div *ngFor="let menu of menuPrincipal">
+        <a *ngIf="menu.route" mat-list-item  [routerLink]="menu.route">
+            <mat-icon>{{ menu.icon }}</mat-icon>
+            <span class="nav-link">{{ menu.name }}</span>
+        </a>
+
+        <mat-accordion *ngIf="!menu.route">
+            <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-icon>{{ menu.icon }}</mat-icon>
+                        <span>{{ menu.name }}</span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <a mat-list-item *ngFor="let submenu of menu.submenu" [routerLink]="submenu.route">
+                    <mat-icon>{{ submenu.icon }}</mat-icon>
+                    <span>{{ submenu.name }}</span>
+                </a>
+                <a mat-list-item *ngFor="let submenu of menu.submenu" [routerLink]="submenu.routeFactura">
+                    <mat-icon>{{ submenu.factuIco }}</mat-icon>
+                    <span>{{ submenu.facturas }}</span>
+                </a>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</mat-nav-list>
